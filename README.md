@@ -4,7 +4,7 @@ Sample application written using NextJS, tRPC, Prisma and Tailwind.
 
 ## Getting Started
 
-1. Create a copy of the `.env.conf` file, rename it to `.env.local`
+1. Create a copy of the `.env.conf` file, rename it to `.env`
 and set the environment variables. 
 
 2. Install the project dependencies using:
