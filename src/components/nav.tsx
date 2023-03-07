@@ -11,11 +11,11 @@ export const Nav: React.FC = () => {
           pqno
         </Link>
       </div>
-      <div>
+      {/* <div>
         <button className="px-4 py-2 bg-yellow-200 text-yellow-900 font-semibold text-sm rounded-md shadow">
           Entrar
         </button>
-      </div>
+      </div> */}
     </nav>
   );
 };

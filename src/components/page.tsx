@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Footer } from "./footer";
 import { Nav } from "./nav";
 
 type PageProps = {
@@ -29,9 +30,10 @@ export const Page: React.FC<PageProps> = ({ children, title, desciption }) => {
       </Head>
       <div className="bg-stone-900 text-stone-100">
         <Nav />
-        <main className="p-4 container mx-auto max-w-7xl min-h-screen">
+        <main className="p-4 container mx-auto max-w-7xl min-h-screen shadow-md">
           {children}
         </main>
+        <Footer />
       </div>
     </>
   );

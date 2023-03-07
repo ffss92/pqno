@@ -2,7 +2,7 @@ import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import { prisma } from "./prisma";
 import { getServerSession, Session } from "next-auth";
-import { authOptions } from "~/pages/api/auth/[...auth]";
+import { authOptions } from "~/pages/api/auth/[...nextauth]";
 
 interface CreateContextOptions {
   session: Session | null;

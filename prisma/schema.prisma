@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
@@ -70,8 +70,21 @@ model Link {
   originalUrl String  @map("original_url")
   userId      String?
   blocked     Boolean @default(false)
+  private     Boolean @default(false)
 
-  user User? @relation(fields: [userId], references: [id])
+  user   User?    @relation(fields: [userId], references: [id])
+  visits Visits[]
 
   @@map("links")
+}
+
+model Visits {
+  id        String   @id @default(cuid())
+  linkId    String   @map("link_id")
+  visitorIp String?  @map("visitor_ip")
+  visitedAt DateTime @default(now()) @map("visited_at")
+
+  link Link @relation(fields: [linkId], references: [id])
+
+  @@map("visits")
 }
