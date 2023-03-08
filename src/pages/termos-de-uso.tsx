@@ -40,8 +40,8 @@ const TermosDeUso: NextPage = () => {
             propriedade dos materiais; ou&nbsp;
           </li>
           <li>
-            Transferir os materiais para outra pessoa ou 'espelhe' os materiais
-            em qualquer outro servidor.
+            Transferir os materiais para outra pessoa ou &apos;espelhe&apos; os
+            materiais em qualquer outro servidor.
           </li>
         </ol>
         <p>
@@ -56,12 +56,12 @@ const TermosDeUso: NextPage = () => {
         </h2>
         <ol className="list-disc px-4 text-sm text-stone-700 my-2">
           <li>
-            Os materiais no site da pqno são fornecidos 'como estão'. pqno não
-            oferece garantias, expressas ou implícitas, e, por este meio, isenta
-            e nega todas as outras garantias, incluindo, sem limitação,
-            garantias implícitas ou condições de comercialização, adequação a um
-            fim específico ou não violação de propriedade intelectual ou outra
-            violação de direitos.
+            Os materiais no site da pqno são fornecidos &apos;como estão&apos;.
+            pqno não oferece garantias, expressas ou implícitas, e, por este
+            meio, isenta e nega todas as outras garantias, incluindo, sem
+            limitação, garantias implícitas ou condições de comercialização,
+            adequação a um fim específico ou não violação de propriedade
+            intelectual ou outra violação de direitos.
           </li>
           <li>
             Além disso, o pqno não garante ou faz qualquer representação
