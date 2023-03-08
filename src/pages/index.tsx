@@ -40,12 +40,12 @@ const Home: NextPage = () => {
       title="Home"
       desciption={pageDescriptions.home}
     >
-      <div className="flex flex-col items-center justify-center py-20">
-        <h2 className="py-4 font-bold text-5xl md:text-6xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-rose-500">
+      <div className="flex flex-col items-center justify-center py-4 md:py-16">
+        <h2 className="py-4 font-bold text-4xl sm:text-5xl md:text-7xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-rose-500">
           Seu link, pqno.
         </h2>
       </div>
-      <div className="container mx-auto max-w-xl p-4 bg-stone-100 rounded-lg shadow-md">
+      <div className="container mx-auto max-w-xl p-4 bg-stone-100 rounded-lg shadow-md mt-8">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col md:flex-row gap-2"
@@ -54,6 +54,8 @@ const Home: NextPage = () => {
             type="text"
             placeholder="Digite seu link aqui."
             autoComplete="off"
+            autoCapitalize="off"
+            translate="no"
             value={link}
             onChange={handleChange}
             className="p-2 w-full rounded-lg shadow border border-transparent focus:shadow-none text-stone-800 focus:outline-none focus:border-purple-500 focus:ring focus:ring-purple-300 transition"
