@@ -3,13 +3,14 @@ import { Page } from "~/components/page";
 import { pageDescriptions } from "~/utils/meta";
 import {
   ClipboardDocumentListIcon,
+  XMarkIcon,
   InformationCircleIcon,
-  MinusCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { trpc } from "~/utils/trpc";
 import { toast } from "react-hot-toast";
 import { useLinkActions, useLinkStore } from "~/store";
+import { LoadingSpinner } from "~/components/loading-spinner";
 
 const Home: NextPage = () => {
   const actions = useLinkActions();
@@ -44,7 +45,7 @@ const Home: NextPage = () => {
           Seu link, pqno.
         </h2>
       </div>
-      <div className="container mx-auto max-w-xl p-4 bg-stone-200 rounded-lg shadow-md">
+      <div className="container mx-auto max-w-xl p-4 bg-stone-100 rounded-lg shadow-md">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col md:flex-row gap-2"
@@ -59,9 +60,9 @@ const Home: NextPage = () => {
           />
           <button
             disabled={createLink.isLoading || link === ""}
-            className="shrink-0 px-4 py-2 text-white bg-purple-500 disabled:bg-stone-500 rounded-lg hover:bg-purple-600 active:bg-purple-500 font-semibold focus:outline-none focus:ring focus:ring-purple-300 transition"
+            className="shrink-0 min-w-[100px] min-h-[40px] inline-flex items-center justify-center px-4 py-2 text-white bg-purple-500 disabled:bg-stone-500 disabled:cursor-not-allowed rounded-lg hover:bg-purple-600 active:bg-purple-500 font-semibold focus:outline-none focus:ring focus:ring-purple-300 transition"
           >
-            Encurtar
+            {createLink.isLoading ? <LoadingSpinner /> : "Encurtar"}
           </button>
         </form>
         <LinkSection />
@@ -72,22 +73,33 @@ const Home: NextPage = () => {
 
 const LinkSection: React.FC = () => {
   const totalLinks = useLinkStore((state) => state.links.length);
+  const actions = useLinkActions();
 
   return (
-    <div className="mt-4">
-      <div className="p-4 border border-stone-900/20 w-full rounded-md">
+    <>
+      <div className="flex justify-end my-1">
+        <button
+          onClick={actions.clearAll}
+          disabled={totalLinks === 0}
+          className="py-2 text-sm font-semibold text-red-600 disabled:text-stone-600 disabled:cursor-not-allowed"
+        >
+          Limpar
+        </button>
+      </div>
+      <div className="py-4 border border-stone-900/20 w-full rounded-md max-h-72 overflow-auto">
         {totalLinks === 0 ? <EmptyState /> : <RecentLinks />}
       </div>
-    </div>
+    </>
   );
 };
 
 const EmptyState: React.FC = () => {
   return (
     <>
-      <p className="text-stone-500 text-sm">
-        Utilize o campo acima para encurtar seu link. Eles aparecerão aqui para
-        você copiar e compartilhar.
+      <p className="text-stone-500 text-sm p-2 inline-flex items-start">
+        <InformationCircleIcon className="w-6 h-6 shrink-0 mr-2" /> Utilize o
+        campo acima para encurtar seu link. Eles aparecerão aqui para você
+        copiar e compartilhar.
       </p>
     </>
   );
@@ -107,12 +119,12 @@ const RecentLinks: React.FC = () => {
     <div className="text-sm text-stone-800">
       {links.map((link) => (
         <div
-          className="flex items-center py-1"
+          className="flex items-center p-2"
           key={link.id}
         >
           {/* Info */}
           <div className="flex-1 overflow-auto">
-            <p className="truncate font-semibold text-stone-600">
+            <p className="truncate font-semibold text-stone-800">
               {createShortUrl(link.code)}
             </p>
             <p className="truncate text-xs text-stone-500">
@@ -121,11 +133,17 @@ const RecentLinks: React.FC = () => {
           </div>
           {/* Actions */}
           <div className="flex-shrink-0 ml-2 flex gap-1 items-center">
-            <button onClick={() => copyShortUrl(link.code)}>
+            <button
+              aria-label="Copiar link"
+              onClick={() => copyShortUrl(link.code)}
+            >
               <ClipboardDocumentListIcon className="w-6 h-6 fill-stone-600" />
             </button>
-            <button onClick={() => actions.clear(link.id)}>
-              <MinusCircleIcon className="w-6 h-6 fill-red-700" />
+            <button
+              aria-label="Remover da lista"
+              onClick={() => actions.clear(link.id)}
+            >
+              <XMarkIcon className="w-6 h-6 fill-stone-600" />
             </button>
           </div>
         </div>

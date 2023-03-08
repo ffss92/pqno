@@ -60,12 +60,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       };
     }
 
-    await prisma.visits.create({
-      data: {
-        linkId: link.id,
-        visitorIp: ip,
-      },
-    });
+    // Save visit if link is not private
+    if (!link.private) {
+      await prisma.visits.create({
+        data: {
+          linkId: link.id,
+          visitorIp: ip,
+        },
+      });
+    }
 
     // Redirect
     return {
